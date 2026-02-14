@@ -1,1 +1,9 @@
 site_name: Сайт-портфолио Alwiest
+theme:
+  name: material
+
+extra:
+  palette:
+    scheme: slate
+    primary: black
+    accent: white
