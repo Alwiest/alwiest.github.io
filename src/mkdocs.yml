@@ -1,7 +1,7 @@
 site_name: Сайт-портфолио Alwiest
 
 theme:
-  name: dracula
+  name: darkly
 
 nav:
   - Главная: index.md
