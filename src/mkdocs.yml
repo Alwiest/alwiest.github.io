@@ -1,14 +1,12 @@
 site_name: Сайт-портфолио Alwiest
 
 theme:
-  name: material
-  palette:
-    scheme: slate
-    primary: black
-    accent: white
+  name: dracula
 
 nav:
   - Главная: index.md
-  - Об авторе: about/index.md
+  - Об авторе: about.md
   - Лабораторные работы:
       - Лабораторная 1: labs/lab1.md
+      - Лабораторная 2: labs/lab2.md
+      - Лабораторная 3: labs/lab3.md
