@@ -1,9 +1,14 @@
 site_name: Сайт-портфолио Alwiest
+
 theme:
   name: material
-
-extra:
   palette:
     scheme: slate
     primary: black
     accent: white
+
+nav:
+  - Главная: index.md
+  - Об авторе: about/index.md
+  - Лабораторные работы:
+      - Лабораторная 1: labs/lab1.md
