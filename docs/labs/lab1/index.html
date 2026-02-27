@@ -139,7 +139,7 @@
 <h4 id="1_1">1. Настройка окружения</h4>
 <pre><code class="language-powershell">python -m venv venv
 .\venv\Scripts\Activate.ps1
-pip install mkdocs mkdocs-dracula-theme
+pip install mkdocs mkdocs-bootswatch
 </code></pre>
 <h4 id="2">2. Инициализация проекта</h4>
 <pre><code class="language-powershell">mkdocs new src
@@ -147,13 +147,17 @@ cd src
 </code></pre>
 <h4 id="3-mkdocsyml">3. Конфигурация mkdocs.yml</h4>
 <pre><code>site_name: Сайт-портфолио Alwiest
+
 theme:
-  name: dracula
+  name: darkly
+
 nav:
   - Главная: index.md
   - Об авторе: about.md
   - Лабораторные работы:
       - Лабораторная 1: labs/lab1.md
+      - Лабораторная 2: labs/lab2.md
+      - Лабораторная 3: labs/lab3.md
 </code></pre>
 <h4 id="4">4. Сборка и публикация</h4>
 <p><code>mkdocs build -d ../docs
