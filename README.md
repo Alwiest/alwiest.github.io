@@ -57,7 +57,6 @@ alwiest.github.io/
 │ │ ├── about.md # Страница "Об авторе"
 │ │ └── labs/ # Отчёты по лабораторным работам
 │ └── mkdocs.yml # Конфигурация MkDocs
-├── venv/
 ├── .gitignore
 └── README.md 
 ```
