@@ -1,15 +1,24 @@
-name: Lab 3 deploy site
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -17,16 +26,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install MkDocs and dependencies
+      - name: Install dependencies
         run: |
           pip install mkdocs
           pip install mkdocs-material
 
       - name: Build site
-        run: mkdocs build -f src/mkdocs.yml
+        run: mkdocs build -f src/mkdocs.yml -d ./site
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './site'
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./src/site
+        id: deployment
+        uses: actions/deploy-pages@v4
