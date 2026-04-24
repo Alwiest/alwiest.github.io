@@ -17,8 +17,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install MkDocs
-        run: pip install mkdocs
+      - name: Install MkDocs and dependencies
+        run: |
+          pip install mkdocs
+          pip install mkdocs-darkly
 
       - name: Build site
         run: mkdocs build -f src/mkdocs.yml
