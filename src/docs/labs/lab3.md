@@ -13,8 +13,8 @@
 
 Команда добавления второго репозитория:
 ```bash
-git remote add sourcecraft https://sathyscylo:[token]@git.sourcecraft.dev/sathyscylo/lr-3.git
-```
+git remote add sourcecraft https://sathyscylo:[token]@git.sourcecraft.dev/sathyscylo/lr-3.git```
+
 3. Настроен файл .github/workflows/deploy.yml для GitHub Actions.
     - При пуше в ветку main запускается сборка сайта.
     - Готовые файлы публикуются на GitHub Pages.
