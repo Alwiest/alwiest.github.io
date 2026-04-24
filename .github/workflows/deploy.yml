@@ -20,7 +20,7 @@ jobs:
       - name: Install MkDocs and dependencies
         run: |
           pip install mkdocs
-          pip install mkdocs-darkly
+          pip install mkdocs-material
 
       - name: Build site
         run: mkdocs build -f src/mkdocs.yml
