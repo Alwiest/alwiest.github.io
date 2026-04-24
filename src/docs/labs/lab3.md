@@ -1,31 +1,59 @@
-# Лабораторная работа 3
-## Тема: Автоматическое развертывание сайта
+# Лабораторная работа №3
+## Тема: Автоматическое развертывание статического сайта (CI/CD)
 
-### Цель работы
-Настроить автоматический деплой статического сайта на MkDocs через GitHub Actions и Sourcecraft.
+### 1. Цель работы
+Реализовать сценарий автоматического развертывания статического сайта, построенного на движке MkDocs, с использованием платформ GitHub Pages и Yandex SourceCraft. Освоить принципы CI/CD, работу с множественными удаленными репозиториями и настройку токенов доступа.
 
-### Ход работы
+### 2. Организация репозитория
+Работа ведется в едином локальном репозитории. Для синхронизации кода с двумя платформами настроены два удаленных репозитория:
+- **origin**: основной репозиторий на GitHub (`https://github.com/alwiest/alwiest.github.io.git`).
+- **sourcecraft**: репозиторий на платформе SourceCraft (`https://git.sourcecraft.dev/sathyscylo/lr-3.git`).
 
-1. Создан локальный репозиторий с сайтом на MkDocs.
-2. Добавлены два удаленных репозитория:
-   - origin (GitHub)
-   - sourcecraft (Sourcecraft)
-
-Команда добавления второго репозитория:
+Добавление второго репозитория выполнено командой:
 ```bash
-git remote add sourcecraft https://sathyscylo:[token]@git.sourcecraft.dev/sathyscylo/lr-3.git
+git remote add sourcecraft https://sathyscylo:[TOKEN]@git.sourcecraft.dev/sathyscylo/lr-3.git
 ```
+где `[TOKEN]` — персональный токен доступа (PAT), созданный в настройках безопасности SourceCraft с правами на запись.
 
-3. Настроен файл .github/workflows/deploy.yml для GitHub Actions.
-    - При пуше в ветку main запускается сборка сайта.
-    - Готовые файлы публикуются на GitHub Pages.
-4. В настройках Sourcecraft включена автоматическая сборка при обновлении кода.
+Структура проекта:
+- `src/mkdocs.yml`: конфигурационный файл генератора MkDocs
+- `src/docs/`: исходные md-файлы страниц сайта
+- `.github/workflows/deploy.yml`: конфигурация пайплайна для GitHub Actions
+- `.sourcecraft/ci.yaml`: конфигурация пайплайна для встроенного CI SourceCraft
+- `.sourcecraft/sites.yaml`: настройки публикации сайта на SourceCraft
 
-### Результат
+### 3. Выполненные действия и настройки деплоя
 
-Сайт доступен по двум адресам:
+#### 3.1. Деплой на GitHub Pages (через GitHub Actions)
+Для автоматической сборки и публикации сайта на GitHub был создан workflow файл `.github/workflows/deploy.yml`.
 
-1. GitHub: https://alwiest.github.io
-2. Sourcecraft: https://sathyscylo.sourcecraft.site/lr-3
-### Вывод
-Изучены принципы CI/CD, работа с несколькими remote-репозиториями и настройка токенов доступа.
+**Настройки в репозитории GitHub:**
+1. В разделе **Settings -> Actions -> General** установлены права **Read and write permissions** для рабочих процессов.
+2. В разделе **Settings -> Pages** источник публикации (Source) установлен в значение **GitHub Actions**.
+
+**Логика:**
+- При пуше в ветку `main` запускается сборка сайта с помощью команды `mkdocs build`.
+- Собранные статические файлы публикуются в ветку `gh-pages` с использованием экшена `peaceiris/actions-gh-pages`.
+
+#### 3.2. Деплой на SourceCraft (через встроенный CI)
+Для автоматической сборки и публикации сайта на SourceCraft использован встроенный механизм CI/CD платформы.
+
+**Настройки в репозитории SourceCraft:**
+1. Создан файл `.sourcecraft/ci.yaml`, описывающий процесс сборки Docker-контейнера с Python, установки зависимостей (`mkdocs`, `mkdocs-material`) и генерации сайта.
+2. Создан файл `.sourcecraft/sites.yaml` со следующей конфигурацией:
+   ```yaml
+   site:
+     root: "."
+     ref: "release"
+   ```
+   Это указывает платформе брать готовые файлы из корня ветки `release`.
+3. Пайплайн автоматически создает ветку `release`, копирует туда собранные HTML-файлы и выполняет принудительный пуш (`git push -f`).
+
+### 4. Результаты
+Сайт успешно развернут и доступен по следующим адресам:
+1. **GitHub Pages:** [https://alwiest.github.io](https://alwiest.github.io)
+2. **SourceCraft:** [https://sathyscylo.sourcecraft.site/lr-3](https://sathyscylo.sourcecraft.site/lr-3)
+
+### 5. Вывод
+В ходе лабораторной работы был реализован полный цикл CI/CD для статического сайта. Изучены механизмы PAT, работа с множественными remote-репозиториями в Git, а также настройка GitHub Actions и встроенном CI SourceCraft. Получен опыт решения проблем при работе с ветками и настройки прав доступа для автоматического деплоя.
+```
