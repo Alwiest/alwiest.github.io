@@ -1,7 +1,7 @@
 site_name: Сайт-портфолио Alwiest
 
 theme:
-  name: darkly
+  name: material
 
 nav:
   - Главная: index.md
