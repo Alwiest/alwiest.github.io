@@ -14,13 +14,12 @@ workflows:
             script:
               - python -m pip install --upgrade pip
               - pip install mkdocs mkdocs-material
-              - cd ./src && mkdocs build -d ../site
-              - ls -la ../site
+              - cd ./src && mkdocs build -d ./site
+              - ls -la ./site
 
           - name: publish-to-release-branch
             script:
               - git checkout -b release
-              - cp -r ../site/* .
-              - git add .
+              - git add ./src/site
               - "git commit -m \"feat: auto-deploy\""
               - "git push origin release -f"
