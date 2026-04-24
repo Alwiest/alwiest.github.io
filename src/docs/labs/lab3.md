@@ -20,8 +20,11 @@ git remote add sourcecraft https://sathyscylo:[token]@git.sourcecraft.dev/sathys
     - При пуше в ветку main запускается сборка сайта.
     - Готовые файлы публикуются на GitHub Pages.
 4. В настройках Sourcecraft включена автоматическая сборка при обновлении кода.
+
 ### Результат
+
 Сайт доступен по двум адресам:
+
 1. GitHub: https://alwiest.github.io
 2. Sourcecraft: https://sathyscylo.sourcecraft.site/lr-3
 ### Вывод
