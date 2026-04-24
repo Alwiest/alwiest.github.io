@@ -22,5 +22,5 @@ workflows:
               - git checkout -b release
               - cp -r ../site/* .
               - git add .
-              - git commit -m "feat: auto-deploy"
-              - git push origin release -f
+              - "git commit -m \"feat: auto-deploy\""
+              - "git push origin release -f"
